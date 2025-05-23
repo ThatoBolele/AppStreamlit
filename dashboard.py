@@ -7,15 +7,17 @@ import pdfkit
 import os
 import platform
 
-if platform.system() == "Windows":
-    path_wkhtmltopdf = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
-    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
-else:
-    st.warning("PDF export is only available in local Windows environment.")
-    return
+
 
 
 def export_summary_to_pdf(df):
+    if platform.system() == "Windows":
+        path_wkhtmltopdf = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+        config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    else:
+        st.warning("PDF export is only available in local Windows environment.")
+        return
+        
     summary_html = df.describe().to_html(classes="table table-striped", border=0)
 
     html = f"""
