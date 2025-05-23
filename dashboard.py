@@ -4,12 +4,17 @@ from charts import render_executive_tab, render_sales_tab, render_traffic_tab
 from metrics import render_statistical_summary_tab
 from model_ai import load_data, model_load_data
 import pdfkit
-
-path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
-config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+import shutil
 
 
 def export_summary_to_pdf(df):
+    path_wkhtmltopdf = shutil.which("wkhtmltopdf")
+
+    if path_wkhtmltopdf is None:
+        st.error("❌ wkhtmltopdf not found. PDF export will not work in this environment.")
+        return
+
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
     summary_html = df.describe().to_html(classes="table table-striped", border=0)
 
     html = f"""
