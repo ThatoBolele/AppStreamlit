@@ -83,8 +83,10 @@ dtype_spec = {
     'feedback_rating': 'Int8'
 }
 
-# df = load_data()
-df = pd.read_csv("https://drive.google.com/file/d/1We-1PSh1KeVJbIDwTw1TRc5FDiMCDcVe/view?usp=drive_link", dtype=dtype_spec, parse_dates=["timestamp", "date"])
+file_id = "1We-1PSh1KeVJbIDwTw1TRc5FDiMCDcVe"
+url = f"https://drive.google.com/uc?id={file_id}"
+
+df = pd.read_csv("url", dtype=dtype_spec, parse_dates=["timestamp", "date"])
 # df = pd.read_csv("dira_jang.csv")
 df['date'] = pd.to_datetime(df['date'], dayfirst=True)
 df['month'] = df['date'].dt.to_period('M').astype(str)
