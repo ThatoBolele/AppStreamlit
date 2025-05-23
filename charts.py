@@ -108,7 +108,7 @@ def render_executive_tab(df_general):
                         """, unsafe_allow_html=True)
 
                     # Load components
-                    model = joblib.load("models/xgboost_model.pkl")
+                    model = joblib.load("models/random_forest_model.pkl")
                     scaler = joblib.load("models/scaler.pkl")
                     trained_cols = joblib.load("models/trained_columns.pkl")
 
@@ -519,7 +519,7 @@ def render_sales_tab(df_sales, time_filter):
                     """, unsafe_allow_html=True)
 
                 # Load model
-                model = joblib.load("models/xgboost_model.pkl")
+                model = joblib.load("models/random_forest_model.pkl")
                 scaler = joblib.load("models/scaler.pkl")
                 trained_cols = joblib.load("models/trained_columns.pkl")
 
