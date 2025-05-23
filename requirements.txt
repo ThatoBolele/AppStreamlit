@@ -7,4 +7,5 @@ numpy
 pdfkit
 matplotlib
 xgboost
-shutil
+os
+platform
