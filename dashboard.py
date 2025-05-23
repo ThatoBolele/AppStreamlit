@@ -3,45 +3,45 @@ import pandas as pd
 from charts import render_executive_tab, render_sales_tab, render_traffic_tab
 from metrics import render_statistical_summary_tab
 from model_ai import load_data, model_load_data
-import pdfkit
+# import pdfkit
 
-path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
-config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+# path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+# config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
 
 
-def export_summary_to_pdf(df):
-    summary_html = df.describe().to_html(classes="table table-striped", border=0)
+# def export_summary_to_pdf(df):
+#     summary_html = df.describe().to_html(classes="table table-striped", border=0)
 
-    html = f"""
-    <html>
-        <head>
-            <style>
-                body {{ font-family: Arial, sans-serif; padding: 30px; }}
-                h1 {{ color: #2E86C1; }}
-                .table {{ width: 100%; border-collapse: collapse; }}
-                .table td, .table th {{ border: 1px solid #ddd; padding: 8px; }}
-            </style>
-        </head>
-        <body>
-            <h1>Dataset Summary Report</h1>
-            <h3>Total Rows: {df.shape[0]}</h3>
-            <h3>Total Columns: {df.shape[1]}</h3>
-            <h3>Missing Values: {df.isnull().sum().sum()}</h3>
-            {summary_html}
-        </body>
-    </html>
-    """
+#     html = f"""
+#     <html>
+#         <head>
+#             <style>
+#                 body {{ font-family: Arial, sans-serif; padding: 30px; }}
+#                 h1 {{ color: #2E86C1; }}
+#                 .table {{ width: 100%; border-collapse: collapse; }}
+#                 .table td, .table th {{ border: 1px solid #ddd; padding: 8px; }}
+#             </style>
+#         </head>
+#         <body>
+#             <h1>Dataset Summary Report</h1>
+#             <h3>Total Rows: {df.shape[0]}</h3>
+#             <h3>Total Columns: {df.shape[1]}</h3>
+#             <h3>Missing Values: {df.isnull().sum().sum()}</h3>
+#             {summary_html}
+#         </body>
+#     </html>
+#     """
 
-    pdf_file = "summary_report.pdf"
-    pdfkit.from_string(html, pdf_file, configuration=config)
+#     pdf_file = "summary_report.pdf"
+#     pdfkit.from_string(html, pdf_file, configuration=config)
 
-    with open(pdf_file, "rb") as f:
-        st.download_button(
-            label="⬇ Download Summary as PDF",
-            data=f,
-            file_name="summary_report.pdf",
-            mime="application/pdf"
-        )
+#     with open(pdf_file, "rb") as f:
+#         st.download_button(
+#             label="⬇ Download Summary as PDF",
+#             data=f,
+#             file_name="summary_report.pdf",
+#             mime="application/pdf"
+#         )
 
 
 
@@ -91,12 +91,12 @@ with st.sidebar:
     """)
     print(df.columns)
 
-    st.download_button(
-        label="⬇ Download Raw Dataset (CSV)",
-        data=df.to_csv(index=False).encode("utf-8"),
-        file_name="ai_solutions_data.csv",
-        mime="text/csv"
-    )
+    # st.download_button(
+    #     label="⬇ Download Raw Dataset (CSV)",
+    #     data=df.to_csv(index=False).encode("utf-8"),
+    #     file_name="ai_solutions_data.csv",
+    #     mime="text/csv"
+    # )
 
     # Near the end of the summary tab function
     with st.container():
