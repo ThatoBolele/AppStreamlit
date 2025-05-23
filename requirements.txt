@@ -6,5 +6,4 @@ joblib
 numpy
 pdfkit
 matplotlib
-os
 platform
