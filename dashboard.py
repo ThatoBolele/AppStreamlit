@@ -86,7 +86,7 @@ dtype_spec = {
 file_id = "1We-1PSh1KeVJbIDwTw1TRc5FDiMCDcVe"
 url = f"https://drive.google.com/uc?id={file_id}"
 
-df = pd.read_csv(url, dtype=dtype_spec, parse_dates=[ "date"])
+df = pd.read_csv(url, dtype=dtype_spec)
 # df = pd.read_csv("dira_jang.csv")
 df['date'] = pd.to_datetime(df['date'], dayfirst=True)
 df['month'] = df['date'].dt.to_period('M').astype(str)
