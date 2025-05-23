@@ -5,7 +5,6 @@ import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
-from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score, roc_auc_score, classification_report, confusion_matrix
 import streamlit as st
 
@@ -94,25 +93,6 @@ def train_and_score_models():
     print("Accuracy:", accuracy_score(y_test, rf.predict(X_test)))
     print("ROC AUC:", roc_auc_score(y_test, rf.predict_proba(X_test)[:, 1]))
 
-    # ---------- XGBoost ----------
-    xgb = XGBClassifier(
-        use_label_encoder=False,
-        learning_rate=0.05,
-        n_estimators=1000,
-        max_depth=4,
-        subsample=0.8,
-        colsample_bytree=0.8,
-        random_state=42
-    )
-    xgb.fit(X_train, y_train)
-    xgb_probs = xgb.predict_proba(X)[:, 1]
-
-    joblib.dump(xgb, XGB_MODEL_PATH)
-
-    print("=== XGBoost ===")
-    print("Accuracy:", accuracy_score(y_test, xgb.predict(X_test)))
-    print("ROC AUC:", roc_auc_score(y_test, xgb.predict_proba(X_test)[:, 1]))
-
     # ---------- Score and Save ----------
     df['conversion_proba'] = xgb_probs
     df.to_csv(SCORED_PATH, index=False)
@@ -133,9 +113,8 @@ def train_and_score_models():
 
     # Apply model prediction
     df_scored = df_scored.loc[df_features.index]  # match index
-    df_scored['conversion_proba'] = xgb.predict_proba(df_features)[:, 1]
 
     # Save full structure + scored output
     df_scored.to_csv(SCORED_PATH, index=False)
-    return df_scored, rf, xgb
+    return df_scored, rf
 
