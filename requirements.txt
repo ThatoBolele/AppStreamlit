@@ -6,6 +6,5 @@ joblib
 numpy
 pdfkit
 matplotlib
-xgboost
 os
 platform
